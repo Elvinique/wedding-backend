@@ -1,0 +1,6 @@
+.env
+*.exe
+*.test
+/tmp
+/qr_images/*
+server
