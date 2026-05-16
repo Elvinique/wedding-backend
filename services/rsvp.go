@@ -1,11 +1,11 @@
 package services
 
 import (
-	"encoding/base64"
 	"fmt"
 	"os"
 	"path/filepath"
 	"wedding-backend/repository"
+
 	"github.com/google/uuid"
 	"github.com/skip2/go-qrcode"
 )
@@ -64,11 +64,8 @@ func SubmitRSVP(input RSVPInput) (*RSVPResponse, error) {
 		fmt.Printf("Warning: failed to save QR image: %v\n", err)
 	}
 
-	// Send confirmation email (non-blocking)
-	// Send confirmation email (non-blocking)
-	qrBase64 := base64.StdEncoding.EncodeToString(qrImage)
 	go func() {
-		if err := SendRSVPConfirmation(input.Email, input.FullName, qrBase64); err != nil {
+		if err := SendRSVPConfirmation(input.Email, input.FullName, qrToken); err != nil {
 			fmt.Printf("Failed to send email to %s: %v\n", input.Email, err)
 		} else {
 			fmt.Printf("Confirmation email sent to %s\n", input.Email)
