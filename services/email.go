@@ -1,7 +1,6 @@
 package services
 
 import (
-	"encoding/base64"
 	"fmt"
 	"os"
 
@@ -70,15 +69,6 @@ func SendRSVPConfirmation(toEmail, guestName, qrImageBase64 string) error {
 </html>
 `, guestName)
 
-	// Decode base64 back to raw PNG bytes
-	qrBytes, err := base64.StdEncoding.DecodeString(qrImageBase64)
-	if err != nil {
-		return fmt.Errorf("failed to decode QR image: %v", err)
-	}
-
-	// Re-encode cleanly for Resend
-	cleanBase64 := base64.StdEncoding.EncodeToString(qrBytes)
-
 	params := &resend.SendEmailRequest{
 		From:    "onboarding@resend.dev",
 		To:      []string{toEmail},
@@ -87,11 +77,11 @@ func SendRSVPConfirmation(toEmail, guestName, qrImageBase64 string) error {
 		Attachments: []resend.Attachment{
 			{
 				Filename: "entry-qr-code.png",
-				Content:  cleanBase64,
+				Content:  qrImageBase64,
 			},
 		},
 	}
 
-	_, err = client.Emails.Send(params)
+	_, err := client.Emails.Send(params)
 	return err
 }
