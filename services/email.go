@@ -62,9 +62,9 @@ func SendRSVPConfirmation(toEmail, guestName, qrToken string) error {
 
     <div style="border-top:1px solid #EDE4D3;padding-top:24px;text-align:center;">
       <p style="font-size:13px;color:rgba(31,31,31,0.5);line-height:1.8;margin:0;">
-        Saturday, 15 November 2025<br/>
-        Ceremony: 2:00 PM | Reception: 5:00 PM<br/>
-        Victoria Island, Lagos
+        Saturday, 27 June 2026<br/>
+        Church Wedding: 9:00 AM | Reception: 1:00 PM<br/>
+        Daffodil Hotel Banquet Hall, Atali town, Eneka-Igwuruta Road, Port Harcourt.
       </p>
       <p style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#C6A664;margin:16px 0 0;">
         #FaithAndJoe2026
