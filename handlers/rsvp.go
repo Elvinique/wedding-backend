@@ -2,6 +2,8 @@ package handlers
 
 import (
 	"encoding/base64"
+	"wedding-backend/config"
+	"wedding-backend/repository"
 	"wedding-backend/services"
 
 	"github.com/gofiber/fiber/v2"
@@ -60,4 +62,35 @@ func VerifyQR(c *fiber.Ctx) error {
 		"message": "QR code verified successfully",
 		"guest":   rsvp,
 	})
+}
+func GetAllRSVPs(c *fiber.Ctx) error {
+	query := `
+		SELECT id, full_name, email, phone, attendance, guest_count, dietary, qr_token, qr_verified, created_at
+		FROM rsvps
+		ORDER BY created_at DESC
+	`
+	rows, err := config.DB.Query(query)
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{"error": "Failed to fetch RSVPs"})
+	}
+	defer rows.Close()
+
+	var rsvps []repository.RSVP
+	for rows.Next() {
+		var r repository.RSVP
+		if err := rows.Scan(
+			&r.ID, &r.FullName, &r.Email, &r.Phone,
+			&r.Attendance, &r.GuestCount, &r.Dietary,
+			&r.QRToken, &r.QRVerified, &r.CreatedAt,
+		); err != nil {
+			return c.Status(500).JSON(fiber.Map{"error": "Failed to scan RSVPs"})
+		}
+		rsvps = append(rsvps, r)
+	}
+
+	if rsvps == nil {
+		rsvps = []repository.RSVP{}
+	}
+
+	return c.JSON(fiber.Map{"rsvps": rsvps})
 }

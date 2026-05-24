@@ -48,6 +48,9 @@ func main() {
 	app.Post("/api/rsvp", handlers.SubmitRSVP)
 	app.Get("/api/rsvp/verify/:token", handlers.VerifyQR)
 
+	// Admin routes
+	app.Get("/api/admin/rsvps", handlers.GetAllRSVPs)
+
 	// Guestbook routes
 	app.Get("/api/guestbook", handlers.GetMessages)
 	app.Post("/api/guestbook", handlers.PostMessage)
