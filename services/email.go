@@ -77,7 +77,7 @@ func SendRSVPConfirmation(toEmail, guestName, qrToken string) error {
 `, guestName)
 
 	params := &resend.SendEmailRequest{
-		From:    "onboarding@resend.dev",
+		From:    "Faith & Joe Wedding <noreply@faithwedsjoe2026.com.ng>",
 		To:      []string{toEmail},
 		Subject: "Your RSVP is confirmed! | Faith & Joe's Wedding",
 		Html:    htmlBody,
