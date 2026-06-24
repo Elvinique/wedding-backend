@@ -12,7 +12,6 @@ FROM alpine:3.19
 RUN apk add --no-cache ca-certificates
 WORKDIR /app
 COPY --from=builder /app/main .
-COPY --from=builder /app/qr_images ./qr_images
 
 EXPOSE 8080
 CMD ["./main"]
