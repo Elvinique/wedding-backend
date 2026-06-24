@@ -28,7 +28,7 @@ func main() {
 
 	// CORS middleware
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "https://www.faithwedsjoe2026.com.ng,https://faithwedsjoe2026.com.ng,https://wedding-app-omega-three.vercel.app",
+		AllowOrigins: "https://www.faithwedsjoe2026.com.ng,https://faithwedsjoe2026.com.ng,https://wedding-backend-production-aefb.up.railway.app",
 		AllowMethods: "GET,POST,PUT,DELETE,OPTIONS",
 		AllowHeaders: "Origin,Content-Type,Accept,Authorization",
 	}))
